@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malware Predictor</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="eel.js" defer></script>
+    <script src="script.js" defer></script>
+</head>
+<body id="theme-body" class="light-theme">
+    <div id="theme-switcher">
+        <img id="logo" src="assets/mw_logo.png" alt="Logo">
+        <img id="theme-icon" src="assets/media-luna.png" alt="Switch Theme" onclick="switchTheme()">
+    </div>
+    <div id="div-msg">
+        <p>Analiza archivos sospechosos en busca de malware y amenazas. <br> Protégete contra las vulnerabilidades y asegura la integridad de tu sistema.</p>
+    </div>
+    <button id="upload-btn" onclick="selectFile()">Seleccionar Archivo</button>
+    <div id="container">
+        <p id="prediction"></p>
+        <img id="image">
+    </div>
+    <footer id="footer">
+        <p>Este predictor de malware utiliza un modelo de redes neuronales convolucionales (CNN)<br> entrenado con datos de 25 familias de malware y 1 de no malware.<br> ¡Visita nuestro repositorio en <a href="https://github.com/rockysaimon/CnnModelForMalwareDetection">GitHub</a> para obtener más información!</a></p>
+    </footer>
+</body>
+</html>

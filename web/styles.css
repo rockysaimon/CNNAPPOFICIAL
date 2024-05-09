@@ -1,0 +1,95 @@
+/* Estilos generales */
+body {
+    margin: 0;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#theme-switcher {
+    display: flex;
+    justify-content: space-between; /* Para separar los elementos */
+    align-items: center; /* Para centrar verticalmente los elementos */
+    width: 100%;
+    height: 220px;
+    margin-bottom: 100px;
+    background-color: #0b4dda;
+}
+
+#logo {
+    margin: 0 auto; /* Para centrar horizontalmente */
+    height: 210px;
+    width: 210px;
+}
+
+#div-msg{
+    text-align: center;
+    font-size: 13px;
+}
+
+#container {
+    margin-top: 40px;
+    text-align: center;
+}
+#theme-icon{
+    width: 24px;
+    height: 24px;
+    padding-right: 2%;
+}
+
+/* Estilos para el tema claro */
+.light-theme {
+    background-color: white;
+    color: #0b4dda;
+}
+
+/* Estilos para el tema oscuro */
+.dark-theme {
+    background-color: #282c37;
+    color: white;
+}
+.dark-theme #theme-switcher{
+    background-color: #28334b;
+}
+.dark-theme #upload-btn{
+    background-color: #28334b;
+    /*282c37*/
+}
+
+
+/* Estilos para el botón de subir archivo */
+#upload-btn {
+    margin: 50px auto;
+    display: block;
+    border: none;
+    background-color: #0b4dda;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50%; /* Hacer el botón redondo */
+    width: 130px; /* Ajustar el ancho del botón */
+    height: 130px; /* Ajustar la altura del botón */
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+}
+
+#upload-btn:hover {
+    animation: pulse 0.5s infinite alternate;
+}
+
+@keyframes pulse {
+    to {
+        transform: scale(1.1);
+    }
+}
+
+/* Estilos para el footer */
+#footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 60px;
+}
+
+#footer a {
+    color: #0b4dda;
+    text-decoration: underline;
+}
