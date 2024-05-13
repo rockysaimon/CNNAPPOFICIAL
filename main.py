@@ -15,7 +15,7 @@ eel.init('web')
 class MalwarePredictor:
     def __init__(self):
         # Cargar el modelo de CNN previamente entrenado
-        self.model = tf.keras.models.load_model('train_model\modelo3.keras')
+        self.model = tf.keras.models.load_model(r'train_model\modelo3.keras')
 
     @staticmethod
     def convert_to_binary_image(file_path):
