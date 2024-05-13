@@ -15,14 +15,14 @@ eel.init('web')
 class MalwarePredictor:
     def __init__(self):
         # Cargar el modelo de CNN previamente entrenado
-        self.model = tf.keras.models.load_model('train_model/prueba4.h5')
+        self.model = tf.keras.models.load_model('train_model\modelo3.keras')
 
     @staticmethod
     def convert_to_binary_image(file_path):
         try:
             pe = pefile.PE(file_path)
             sections = ['.data', '.rsrc', '.rdata', '.text']
-            binary_image = np.zeros((128, 256, 1), dtype=np.uint8)
+            binary_image = np.zeros((256, 256), dtype=np.uint8)  # Usar solo dos dimensiones ya que la imagen es en escala de grises
 
             for section in pe.sections:
                 section_name = section.Name.decode().strip('\x00')
@@ -30,32 +30,34 @@ class MalwarePredictor:
                     start = section.PointerToRawData
                     end = start + section.SizeOfRawData
                     data = section.get_data()
-                    section_image = np.frombuffer(data, dtype=np.uint8).reshape(-1, 256)[:128, :]
-                    section_image = np.expand_dims(section_image, axis=-1)
+                    section_image = np.frombuffer(data, dtype=np.uint8).reshape(-1, 256)[:256, :]
 
                     # Ajustar la forma de section_image si es necesario
-                    if section_image.shape[0] < 128:
-                        pad_size = 128 - section_image.shape[0]
-                        section_image = np.pad(section_image, ((0, pad_size), (0, 0), (0, 0)), mode='constant', constant_values=0)
+                    if section_image.shape[0] < 256:
+                        pad_size = 256 - section_image.shape[0]
+                        section_image = np.pad(section_image, ((0, pad_size), (0, 0)), mode='constant', constant_values=0)
 
                     # Copiar la sección en la posición adecuada de binary_image
                     binary_image = np.maximum(binary_image, section_image)
 
-            return binary_image
+            # Convertir la imagen a una imagen RGB repitiendo el canal de color
+            rgb_image = np.repeat(np.expand_dims(binary_image, axis=-1), 3, axis=-1)
+            return rgb_image
         except Exception as e:
             raise Exception(f'Error al convertir el archivo a imagen binaria: {str(e)}')
+
 
     @staticmethod
     def predict_malware(binary_image):
         try:
-            model = tf.keras.models.load_model('train_model/prueba4.h5')  # Cargar el modelo
-            predictions = model.predict(np.expand_dims(binary_image, axis=0))
+            predictions = malware_predictor.model.predict(np.expand_dims(binary_image, axis=0))
             predicted_class = np.argmax(predictions)
             probability = predictions[0][predicted_class]
 
             return predicted_class, probability
         except Exception as e:
             raise Exception(f'Error al realizar la predicción: {str(e)}')
+
         
     import numpy as np
 
